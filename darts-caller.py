@@ -1745,6 +1745,7 @@ def process_match_x01(m):
     
     # Check for 1. Dart
     elif turns != None and turns['throws'] != [] and len(turns['throws']) == 1:
+        segment = turns['throws'][0]['segment']['number']
         isGameFinished = False
         dart1score = points
         dart1Thrown = {
@@ -1755,13 +1756,15 @@ def process_match_x01(m):
                 "mode": variant,
                 "pointsLeft": str(remainingPlayerScore),
                 "dartNumber": "1",
-                "dartValue": points       
+                "dartValue": points,
+                "segment": segment
             }
         }
         broadcast(dart1Thrown)
 
     # Check for 2. Dart
     elif turns != None and turns['throws'] != [] and len(turns['throws']) == 2:
+        segment = turns['throws'][1]['segment']['number']
         isGameFinished = False
         dart2score = str(int(points) - int(dart1score))
         dart2Thrown = {
@@ -1772,13 +1775,15 @@ def process_match_x01(m):
                 "mode": variant,
                 "pointsLeft": str(remainingPlayerScore),
                 "dartNumber": "2",
-                "dartValue": dart2score        
+                "dartValue": dart2score,
+                "segment": segment
             }
         }
         broadcast(dart2Thrown)
 
     # Check for 3. Dart - Score-call
     elif turns != None and turns['throws'] != [] and len(turns['throws']) == 3:
+        segment = turns['throws'][2]['segment']['number']
         isGameFinished = False
         dart3score = str(int(points) - int(dart1score) - int(dart2score))
         dart3Thrown = {
@@ -1789,7 +1794,8 @@ def process_match_x01(m):
                 "mode": variant,
                 "pointsLeft": str(remainingPlayerScore),
                 "dartNumber": "3",
-                "dartValue": dart3score        
+                "dartValue": dart3score,
+                "segment": segment
             }
         }
         broadcast(dart3Thrown)
